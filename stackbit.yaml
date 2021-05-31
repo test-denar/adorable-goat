@@ -1,6 +1,6 @@
 stackbitVersion: ~0.2.0
 ssgName: gatsby
-ssgVersion: 0.1.12
+ssgVersion: null
 buildCommand: ./ssg-build.sh
 publishDir: public
 staticDir: static
@@ -100,6 +100,8 @@ stackbit_banner:
   name: Vanilla
   create_url: 'https://app.stackbit.com/create?theme=vanilla'
   github_url: 'https://github.com/stackbithq/stackbit-theme-vanilla'
+cmsName: git
+nodeVersion: '12'
 models:
   config:
     type: config
@@ -223,7 +225,8 @@ models:
     type: page
     label: Page
     template: page
-    exclude: posts/**
+    exclude:
+      - posts/**
     fields:
       - type: string
         name: title
@@ -307,31 +310,66 @@ models:
   postlist:
     type: object
     label: Post List
-    extends:
-      - section
     fields:
+      - type: string
+        name: title
+        label: Section Title
+        description: >-
+          The section title (Used by the CMS, even if it is not displayed in the
+          section)
+      - type: string
+        name: section_id
+        label: Element ID
       - name: component
         const: Postlist
+        type: string
+        label: Component
+        required: true
+        hidden: true
+    labelField: title
   contentblock:
     type: object
     label: Content Section
-    extends:
-      - section
     fields:
+      - type: string
+        name: title
+        label: Section Title
+        description: >-
+          The section title (Used by the CMS, even if it is not displayed in the
+          section)
+      - type: string
+        name: section_id
+        label: Element ID
       - name: component
         const: ContentBlock
+        type: string
+        label: Component
+        required: true
+        hidden: true
       - type: markdown
         name: content
         label: Content
         description: The text content of the section
+    labelField: title
   textimageblock:
     type: object
     label: Content Section With Image
-    extends:
-      - section
     fields:
+      - type: string
+        name: title
+        label: Section Title
+        description: >-
+          The section title (Used by the CMS, even if it is not displayed in the
+          section)
+      - type: string
+        name: section_id
+        label: Element ID
       - name: component
         const: TextImageBlock
+        type: string
+        label: Component
+        required: true
+        hidden: true
       - type: markdown
         name: text
         label: Text
@@ -340,14 +378,26 @@ models:
         name: image
         label: Image
         description: The image to display with the text
+    labelField: title
   heroblock:
     type: object
     label: Hero Header With Image
-    extends:
-      - section
     fields:
+      - type: string
+        name: title
+        label: Section Title
+        description: >-
+          The section title (Used by the CMS, even if it is not displayed in the
+          section)
+      - type: string
+        name: section_id
+        label: Element ID
       - name: component
         const: HeroBlock
+        type: string
+        label: Component
+        required: true
+        hidden: true
       - type: markdown
         name: subtitle
         label: Subtitle
@@ -356,6 +406,7 @@ models:
         name: image
         label: Image
         description: The image to display with the text
+    labelField: title
   site_menus:
     type: data
     file: menus.json
